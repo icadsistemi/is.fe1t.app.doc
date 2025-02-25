@@ -204,6 +204,24 @@ components:
                 type: boolean
               is_credit_note:
                 type: boolean
+    InvoicesApproveInput:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+    InvoicesRejectInput:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
     InvoiceDetailsOutput:
       type: object
       properties:

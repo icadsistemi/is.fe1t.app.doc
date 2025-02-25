@@ -231,3 +231,52 @@ paths:
       responses:
         "201":
           description: No content
+  "/invoices/{invoice_id}/details/{detail_id}/reject":
+    post:
+      tags:
+        - Invoices
+      summary: Reject invoice detail
+      parameters:
+        - name: invoice_id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+        - name: detail_id
+          in: path
+          description: Detail id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          description: No content
+  "/invoices/approve":
+    post:
+      tags:
+        - Invoices
+      summary: Approve invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./schemas.yaml#/components/schemas/InvoicesApproveInput"
+      responses:
+        "201":
+          description: No content
+  "/invoices/reject":
+    post:
+      tags:
+        - Invoices
+      summary: Reject invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./schemas.yaml#/components/schemas/InvoicesRejectInput"
+      responses:
+        "201":
+          description: No content
