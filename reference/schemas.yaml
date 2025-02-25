@@ -1,0 +1,329 @@
+components:
+  schemas:
+    ConfigurationOutput:
+      type: object
+      properties:
+        articles:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        price_levels:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        fuelstations_settings:
+          type: object
+          properties:
+            unattended_photo_values:
+              type: array
+              items:
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        payment_periodicities:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    CustomersOutput:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        vat_number:
+          type: string
+        sdi_code:
+          type: string
+        pec:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip_code:
+          type: string
+        telephone:
+          type: string
+        email:
+          type: string
+        payment_periodicity_id:
+          type: integer
+        has_split_paymaent:
+          type: boolean
+        is_no_profit:
+          type: boolean
+    CustomersInput:
+      type: object
+      properties:
+        name:
+          type: string
+        vat_number:
+          type: string
+        sdi_code:
+          type: string
+        pec:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip_code:
+          type: string
+        telephone:
+          type: string
+        email:
+          type: string
+        payment_periodicity_id:
+          type: integer
+        has_split_paymaent:
+          type: boolean
+        is_no_profit:
+          type: boolean
+    FuelstationsOutput:
+      type: object
+      properties:
+        fuelstations:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: string
+              city:
+                type: string
+    FuelstationsSettingsOutput:
+      type: object
+      properties:
+        settings:
+          type: object
+          properties:
+            attended:
+              type: object
+              properties:
+                auto_approval:
+                  type: boolean
+                is_ticket_mandatory:
+                  type: boolean
+                is_picture_mandatory:
+                  type: boolean
+                supply_auto_retrieve:
+                  type: boolean
+            unattended:
+              type: object
+              properties:
+                auto_approval:
+                  type: boolean
+                is_ticket_mandatory:
+                  type: boolean
+                is_picture_mandatory:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+            pumps:
+              type: integer
+            articles:
+              type: array
+              items:
+                properties:
+                  code:
+                    type: string
+                  name:
+                    type: string
+    FuelstationSettingsInput:
+      type: object
+      properties:
+        attended:
+          type: object
+          properties:
+            auto_approval:
+              type: boolean
+            is_ticket_mandatory:
+              type: boolean
+            is_picture_mandatory:
+              type: boolean
+            supply_auto_retrieve:
+              type: boolean
+        unattended:
+          type: object
+          properties:
+            auto_approval:
+              type: boolean
+            is_ticket_mandatory:
+              type: boolean
+            is_picture_mandatory:
+              type: integer
+              enum:
+                - 1
+                - 2
+                - 3
+    InvoicesSearchOutput:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              amount:
+                type: number
+              customer_name:
+                type: string
+              customer_vat_number:
+                type: string
+              date_time:
+                type: string
+                format: date-time
+              is_immediate:
+                type: boolean
+              from_selfnet:
+                type: boolean
+              is_credit_note:
+                type: boolean
+    InvoiceDetailsOutput:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            properties:
+              user:
+                type: string
+              vehicle:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  plate:
+                    type: string
+                  model:
+                    type: string
+              km:
+                type: integer
+              quantity:
+                type: integer
+              fuel_station:
+                type: object
+                properties:
+                  full_address:
+                    type: string
+                  address:
+                    type: string
+                  city:
+                    type: string
+                  flag:
+                    type: string
+                  name:
+                    type: string
+                  phone_number:
+                    type: string
+                  cellphone_number:
+                    type: string
+              unit_of_measure:
+                type: string
+              payments:
+                type: null
+              ddt_number:
+                type: string
+              unit_price:
+                type: number
+              card_id:
+                type: integer
+              receipt_number:
+                type: string
+              total_amount:
+                type: number
+              id:
+                type: integer
+              invoice_id:
+                type: integer
+              article:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  code:
+                    type: string
+                  description:
+                    type: string
+              transaction_timestamp:
+                type: string
+                format: date-time
+    InvoiceDetailInput:
+      type: object
+      properties:
+        payments:
+          type: array
+          items:
+            properties:
+              payment_method_code:
+                type: string
+                enum:
+                  - "MP02"
+                  - "MP08"
+              amount:
+                type: number
+        vehicle_id:
+          type: integer
+        km:
+          type: integer
+        erog_id:
+          type: integer
+        unit_price:
+          type: number
+        article_code:
+          type: integer
+          format: int32
+        receipt_number:
+          type: string
+        total_amount:
+          type: number
+        transaction_timestamp:
+          type: string
+          format: date-time
+    PricesOutput:
+      type: object
+      properties:
+        prices:
+          type: array
+          items:
+            properties:
+              service_level:
+                type: integer
+              product_code:
+                type: string
+              price:
+                type: number
+    PricesInput:
+      type: object
+      properties:
+        service_level:
+          type: integer
+        product_code:
+          type: string
+        price:
+          type: number

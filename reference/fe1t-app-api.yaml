@@ -19,7 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConfigurationOutput"
+                $ref: "./schemas.yaml#/components/schemas/ConfigurationOutput"
   "/customers":
     get:
       tags:
@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CustomersOutput"
+                $ref: "./schemas.yaml#/components/schemas/CustomersOutput"
   "/customers/{id}":
     put:
       tags:
@@ -62,7 +62,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CustomersInput"
+              $ref: "./schemas.yaml#/components/schemas/CustomersInput"
       responses:
         "201":
           description: No content
@@ -77,14 +77,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FuelstationsOutput"
-  "/fuelstations/{id}":
+                $ref: "./schemas.yaml#/components/schemas/FuelstationsOutput"
+  "/fuelstations/{fuelstation_id}":
     get:
       tags:
         - Fuelstations
       summary: Get fuelstation settings
       parameters:
-        - name: id
+        - name: fuelstation_id
           in: path
           description: Fuelstation id
           required: true
@@ -96,13 +96,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FuelstationsSettingsOutput"
+                $ref: "./schemas.yaml#/components/schemas/FuelstationsSettingsOutput"
     put:
       tags:
         - Fuelstations
       summary: Update fuelstation settings
       parameters:
-        - name: id
+        - name: fuelstation_id
           in: path
           description: Fuelstation id
           required: true
@@ -113,17 +113,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FuelstationSettingsInput"
+              $ref: "./schemas.yaml#/components/schemas/FuelstationSettingsInput"
       responses:
         "201":
           description: No content
-  "/fuelstations/{id}/prices":
+  "/fuelstations/{fuelstation_id}/prices":
     get:
       tags:
         - Prices
       summary: Get fuelstation active prices
       parameters:
-        - name: id
+        - name: fuelstation_id
           in: path
           description: Fuelstation id
           required: true
@@ -135,7 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PricesOutput"
+                $ref: "./schemas.yaml#/components/schemas/PricesOutput"
     put:
       tags:
         - Prices
@@ -152,215 +152,82 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PricesInput"
+              $ref: "./schemas.yaml#/components/schemas/PricesInput"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PricesOutput"
-components:
-  schemas:
-    ConfigurationOutput:
-      type: object
-      properties:
-        articles:
-          type: array
-          items:
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-        price_levels:
-          type: array
-          items:
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-        fuelstations_settings:
-          type: object
-          properties:
-            unattended_photo_values:
-              type: array
-              items:
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-        payment_periodicities:
-          type: array
-          items:
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-    FuelstationsOutput:
-      type: object
-      properties:
-        fuelstations:
-          type: array
-          items:
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              address:
-                type: string
-              city:
-                type: string
-    PricesOutput:
-      type: object
-      properties:
-        prices:
-          type: array
-          items:
-            properties:
-              service_level:
-                type: integer
-              product_code:
-                type: string
-              price:
-                type: number
-    PricesInput:
-      type: object
-      properties:
-        service_level:
-          type: integer
-        product_code:
-          type: string
-        price:
-          type: number
-    FuelstationsSettingsOutput:
-      type: object
-      properties:
-        settings:
-          type: object
-          properties:
-            attended:
-              type: object
-              properties:
-                auto_approval:
-                  type: boolean
-                is_ticket_mandatory:
-                  type: boolean
-                is_picture_mandatory:
-                  type: boolean
-                supply_auto_retrieve:
-                  type: boolean
-            unattended:
-              type: object
-              properties:
-                auto_approval:
-                  type: boolean
-                is_ticket_mandatory:
-                  type: boolean
-                is_picture_mandatory:
-                  type: integer
-                  enum:
-                    - 1
-                    - 2
-                    - 3
-            pumps:
-              type: integer
-            articles:
-              type: array
-              items:
-                properties:
-                  code:
-                    type: string
-                  name:
-                    type: string
-    FuelstationSettingsInput:
-      type: object
-      properties:
-        attended:
-          type: object
-          properties:
-            auto_approval:
-              type: boolean
-            is_ticket_mandatory:
-              type: boolean
-            is_picture_mandatory:
-              type: boolean
-            supply_auto_retrieve:
-              type: boolean
-        unattended:
-          type: object
-          properties:
-            auto_approval:
-              type: boolean
-            is_ticket_mandatory:
-              type: boolean
-            is_picture_mandatory:
-              type: integer
-              enum:
-                - 1
-                - 2
-                - 3
-    CustomersOutput:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        vat_number:
-          type: string
-        sdi_code:
-          type: string
-        pec:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        province:
-          type: string
-        zip_code:
-          type: string
-        telephone:
-          type: string
-        email:
-          type: string
-        payment_periodicity_id:
-          type: integer
-        has_split_paymaent:
-          type: boolean
-        is_no_profit:
-          type: boolean
-    CustomersInput:
-      type: object
-      properties:
-        name:
-          type: string
-        vat_number:
-          type: string
-        sdi_code:
-          type: string
-        pec:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        province:
-          type: string
-        zip_code:
-          type: string
-        telephone:
-          type: string
-        email:
-          type: string
-        payment_periodicity_id:
-          type: integer
-        has_split_paymaent:
-          type: boolean
-        is_no_profit:
-          type: boolean
+                $ref: "./schemas.yaml#/components/schemas/PricesOutput"
+  "/invoices":
+    get:
+      tags:
+        - Invoices
+      summary: Search invoices
+      parameters:
+        - name: fuelstation_id
+          in: query
+          description: Fuelstation id
+          required: false
+          schema:
+            type: integer
+        - name: status
+          in: query
+          description: Invoice status
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas.yaml#/components/schemas/InvoicesSearchOutput"
+  "/invoices/{invoice_id}/details":
+    get:
+      tags:
+        - Invoices
+      summary: Get invoice details
+      parameters:
+        - name: invoice_id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas.yaml#/components/schemas/InvoiceDetailsOutput"
+  "/invoices/{invoice_id}/details/{detail_id}":
+    put:
+      tags:
+        - Invoices
+      summary: Update invoice detail
+      parameters:
+        - name: invoice_id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+        - name: detail_id
+          in: path
+          description: Detail id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "schemas.yaml#/components/schemas/InvoiceDetailInput"
+      responses:
+        "201":
+          description: No content
