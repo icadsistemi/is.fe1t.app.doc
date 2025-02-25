@@ -1,190 +1,213 @@
 openapi: 3.0.0
-x-stoplight:
-  id: 2sri6wni8tysa
 info:
   title: Fe1T Documentation
-  version: '0.1'
+  version: "0.1"
 servers:
-  - url: 'http://localhost:3000'
+  - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
+    description: Development
+  - url: "https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1"
+    description: Production
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
+  "/configuration":
     get:
-      summary: Get User Info by User ID
-      tags: []
+      tags:
+        - Configuration
+      summary: Get app first configuration
       responses:
-        '200':
-          description: User Found
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
+                $ref: "#/components/schemas/Configuration"
+  "/fuelstations":
+    get:
+      tags:
+        - Fuelstations
+      summary: Get users enabled fuelstations
       responses:
-        '200':
-          description: User Updated
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Updated User Rebecca Baker:
-                  value:
-                    id: 13
-                    firstName: Rebecca
-                    lastName: Baker
-                    email: rebecca@gmail.com
-                    dateOfBirth: '1985-10-02'
-                    emailVerified: false
-                    createDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '409':
-          description: Email Already Taken
-      description: Update the information of an existing user.
+                $ref: "#/components/schemas/Fuelstations"
+  "/fuelstations/{id}":
+    get:
+      tags:
+        - Fuelstations
+      summary: Get fuelstation settings
+      parameters:
+        - name: id
+          in: path
+          description: Fuelstation id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fuelstations settings output"
+  "/fuelstations/{id}/prices":
+    get:
+      tags:
+        - Prices
+      summary: Get fuelstation active prices
+      parameters:
+        - name: id
+          in: path
+          description: Fuelstation id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fuelstations prices output"
+    put:
+      tags:
+        - Prices
+      summary: Upsert fuelstation price
+      parameters:
+        - name: id
+          in: path
+          description: Fuelstation id
+          required: true
+          schema:
+            type: integer
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                  description: 'If a new email is given, the user''s email verified property will be set to false.'
-                dateOfBirth:
-                  type: string
-            examples:
-              Update First Name:
-                value:
-                  firstName: Rebecca
-              Update Email:
-                value:
-                  email: rebecca@gmail.com
-              Update Last Name & Date of Birth:
-                value:
-                  lastName: Baker
-                  dateOfBirth: '1985-10-02'
-        description: Patch user properties to update.
-  /user:
-    post:
-      summary: Create New User
-      operationId: post-user
+              $ref: "#/components/schemas/Fuelstations price input"
       responses:
-        '200':
-          description: User Created
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                New User Bob Fellow:
-                  value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
-        '400':
-          description: Missing Required Information
-        '409':
-          description: Email Already Taken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                dateOfBirth:
-                  type: string
-                  format: date
-              required:
-                - firstName
-                - lastName
-                - email
-                - dateOfBirth
-            examples:
-              Create User Bob Fellow:
-                value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
-        description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
+                $ref: "#/components/schemas/Fuelstations prices output"
 components:
   schemas:
-    User:
-      title: User
+    Configuration:
       type: object
-      description: ''
-      x-examples:
-        Alice Smith:
-          id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
       properties:
-        id:
+        articles:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        price_levels:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        fuelstations_settings:
+          type: object
+          properties:
+            unattended_photo_values:
+              type: array
+              items:
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        payment_periodicities:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    Fuelstations:
+      type: object
+      properties:
+        fuelstations:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: string
+              city:
+                type: string
+    Fuelstations prices output:
+      type: object
+      properties:
+        prices:
+          type: array
+          items:
+            properties:
+              service_level:
+                type: integer
+              product_code:
+                type: string
+              price:
+                type: number
+    Fuelstations price input:
+      type: object
+      properties:
+        service_level:
           type: integer
-          description: Unique identifier for the given user.
-        firstName:
+        product_code:
           type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+        price:
+          type: number
+    Fuelstations settings output:
+      type: object
+      properties:
+        settings:
+          type: object
+          properties:
+            attended:
+              type: object
+              properties:
+                auto_approval:
+                  type: boolean
+                is_ticket_mandatory:
+                  type: boolean
+                is_picture_mandatory:
+                  type: boolean
+                supply_auto_retrieve:
+                  type: boolean
+            unattended:
+              type: object
+              properties:
+                auto_approval:
+                  type: boolean
+                is_ticket_mandatory:
+                  type: boolean
+                is_picture_mandatory:
+                  type: enum
+                  enum:
+                    - "1"
+                    - "2"
+                    - "3"
+            pumps:
+              type: integer
+            articles:
+              type: array
+              items:
+                properties:
+                  code:
+                    string: integer
+                  name:
+                    type: string
