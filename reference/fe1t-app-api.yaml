@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Fe1T Documentation
+  title: FE1T Documentation
   version: "0.1"
 servers:
   - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
@@ -20,6 +20,52 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ConfigurationOutput"
+  "/customers":
+    get:
+      tags:
+        - Customers
+      summary: Search customer
+      parameters:
+        - name: vat_number
+          in: query
+          description: VAT number
+          required: false
+          schema:
+            type: string
+        - name: fiscal_code
+          in: query
+          description: Fiscal code
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomersOutput"
+  "/customers/{id}":
+    put:
+      tags:
+        - Customers
+      summary: Update customer
+      parameters:
+        - name: id
+          in: path
+          description: Customer id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomersInput"
+      responses:
+        "201":
+          description: No content
   "/fuelstations":
     get:
       tags:
@@ -258,3 +304,63 @@ components:
                 - 1
                 - 2
                 - 3
+    CustomersOutput:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        vat_number:
+          type: string
+        sdi_code:
+          type: string
+        pec:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip_code:
+          type: string
+        telephone:
+          type: string
+        email:
+          type: string
+        payment_periodicity_id:
+          type: integer
+        has_split_paymaent:
+          type: boolean
+        is_no_profit:
+          type: boolean
+    CustomersInput:
+      type: object
+      properties:
+        name:
+          type: string
+        vat_number:
+          type: string
+        sdi_code:
+          type: string
+        pec:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip_code:
+          type: string
+        telephone:
+          type: string
+        email:
+          type: string
+        payment_periodicity_id:
+          type: integer
+        has_split_paymaent:
+          type: boolean
+        is_no_profit:
+          type: boolean
