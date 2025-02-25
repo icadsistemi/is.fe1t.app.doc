@@ -19,7 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Configuration"
+                $ref: "#/components/schemas/ConfigurationOutput"
   "/fuelstations":
     get:
       tags:
@@ -31,7 +31,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fuelstations"
+                $ref: "#/components/schemas/FuelstationsOutput"
   "/fuelstations/{id}":
     get:
       tags:
@@ -50,7 +50,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fuelstations settings output"
+                $ref: "#/components/schemas/FuelstationsSettingsOutput"
+    put:
+      tags:
+        - Fuelstations
+      summary: Update fuelstation settings
+      parameters:
+        - name: id
+          in: path
+          description: Fuelstation id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FuelstationSettingsInput"
+      responses:
+        "201":
+          description: No content
   "/fuelstations/{id}/prices":
     get:
       tags:
@@ -69,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fuelstations prices output"
+                $ref: "#/components/schemas/PricesOutput"
     put:
       tags:
         - Prices
@@ -86,17 +106,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fuelstations price input"
+              $ref: "#/components/schemas/PricesInput"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fuelstations prices output"
+                $ref: "#/components/schemas/PricesOutput"
 components:
   schemas:
-    Configuration:
+    ConfigurationOutput:
       type: object
       properties:
         articles:
@@ -134,7 +154,7 @@ components:
                 type: integer
               name:
                 type: string
-    Fuelstations:
+    FuelstationsOutput:
       type: object
       properties:
         fuelstations:
@@ -149,7 +169,7 @@ components:
                 type: string
               city:
                 type: string
-    Fuelstations prices output:
+    PricesOutput:
       type: object
       properties:
         prices:
@@ -162,7 +182,7 @@ components:
                 type: string
               price:
                 type: number
-    Fuelstations price input:
+    PricesInput:
       type: object
       properties:
         service_level:
@@ -171,7 +191,7 @@ components:
           type: string
         price:
           type: number
-    Fuelstations settings output:
+    FuelstationsSettingsOutput:
       type: object
       properties:
         settings:
@@ -196,11 +216,11 @@ components:
                 is_ticket_mandatory:
                   type: boolean
                 is_picture_mandatory:
-                  type: enum
+                  type: integer
                   enum:
-                    - "1"
-                    - "2"
-                    - "3"
+                    - 1
+                    - 2
+                    - 3
             pumps:
               type: integer
             articles:
@@ -208,6 +228,33 @@ components:
               items:
                 properties:
                   code:
-                    string: integer
+                    type: string
                   name:
                     type: string
+    FuelstationSettingsInput:
+      type: object
+      properties:
+        attended:
+          type: object
+          properties:
+            auto_approval:
+              type: boolean
+            is_ticket_mandatory:
+              type: boolean
+            is_picture_mandatory:
+              type: boolean
+            supply_auto_retrieve:
+              type: boolean
+        unattended:
+          type: object
+          properties:
+            auto_approval:
+              type: boolean
+            is_ticket_mandatory:
+              type: boolean
+            is_picture_mandatory:
+              type: integer
+              enum:
+                - 1
+                - 2
+                - 3
