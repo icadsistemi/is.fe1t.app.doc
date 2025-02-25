@@ -210,18 +210,14 @@ components:
         invoices:
           type: array
           items:
-            properties:
-              id:
-                type: integer
+            type: integer
     InvoicesRejectInput:
       type: object
       properties:
         invoices:
           type: array
           items:
-            properties:
-              id:
-                type: integer
+            type: integer
     InvoiceDetailsOutput:
       type: object
       properties:
