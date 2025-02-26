@@ -341,3 +341,14 @@ components:
           type: string
         price:
           type: number
+    UserTermsOutput:
+      type: object
+      properties:
+        app_privacy:
+          type: boolean
+        terms_and_conditions:
+          type: boolean
+        marketing:
+          type: boolean
+        third_parties:
+          type: boolean

@@ -280,3 +280,15 @@ paths:
       responses:
         "201":
           description: No content
+  "/terms":
+    get:
+      tags:
+        - Terms
+      summary: Get user terms and conditions
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas.yaml#/components/schemas/UserTermsOutput"
