@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: '0.1'
+  version: "0.1"
 servers:
-  - url: 'https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1'
+  - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
     description: Development
-  - url: 'https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1'
+  - url: "https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1"
     description: Production
 paths:
   /configuration:
@@ -14,12 +14,12 @@ paths:
         - Configuration
       summary: Get app first configuration
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/ConfigurationOutput'
+                $ref: "#/components/schemas/ConfigurationOutput"
   /customers:
     get:
       tags:
@@ -39,13 +39,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/CustomersOutput'
-  '/customers/{id}':
+                $ref: "#/components/schemas/CustomersOutput"
+  "/customers/{id}":
     put:
       tags:
         - Customers
@@ -62,9 +62,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/CustomersInput'
+              $ref: "#/components/schemas/CustomersInput"
       responses:
-        '201':
+        "201":
           description: No content
   /fuelstations:
     get:
@@ -72,13 +72,13 @@ paths:
         - Fuelstations
       summary: Get users enabled fuelstations
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/FuelstationsOutput'
-  '/fuelstations/{fuelstation_id}/prices':
+                $ref: "#/components/schemas/FuelstationsOutput"
+  "/fuelstations/{fuelstation_id}/prices":
     get:
       tags:
         - Prices
@@ -91,12 +91,12 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/PricesOutput'
+                $ref: "#/components/schemas/PricesOutput"
     put:
       tags:
         - Prices
@@ -113,15 +113,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/PricesInput'
+              $ref: "#/components/schemas/PricesInput"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/PricesOutput'
-  '/fuelstations/{fuelstation_id}':
+                $ref: "#/components/schemas/PricesOutput"
+  "/fuelstations/{fuelstation_id}":
     get:
       tags:
         - Fuelstations
@@ -134,12 +134,12 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/FuelstationsSettingsOutput'
+                $ref: "#/components/schemas/FuelstationsSettingsOutput"
     put:
       tags:
         - Fuelstations
@@ -156,9 +156,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/FuelstationSettingsInput'
+              $ref: "#/components/schemas/FuelstationSettingsInput"
       responses:
-        '201':
+        "201":
           description: No content
   /invoices:
     get:
@@ -179,13 +179,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/InvoicesSearchOutput'
-  '/invoices/{invoice_id}/details':
+                $ref: "#/components/schemas/InvoicesSearchOutput"
+  "/invoices/{invoice_id}/details":
     get:
       tags:
         - Invoices
@@ -198,13 +198,13 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/InvoiceDetailsOutput'
-  '/invoices/{invoice_id}/details/{detail_id}':
+                $ref: "#/components/schemas/InvoiceDetailsOutput"
+  "/invoices/{invoice_id}/details/{detail_id}":
     put:
       tags:
         - Invoices
@@ -227,11 +227,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/InvoiceDetailInput'
+              $ref: "#/components/schemas/InvoiceDetailInput"
       responses:
-        '201':
+        "201":
           description: No content
-  '/invoices/{invoice_id}/details/{detail_id}/reject':
+  "/invoices/{invoice_id}/details/{detail_id}/reject":
     post:
       tags:
         - Invoices
@@ -250,7 +250,7 @@ paths:
           schema:
             type: integer
       responses:
-        '201':
+        "201":
           description: No content
   /invoices/approve:
     post:
@@ -262,28 +262,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/InvoicesApproveInput'
+              $ref: "#/components/schemas/InvoicesApproveInput"
       responses:
-        '201':
+        "201":
           description: No content
   /invoices/attended/prepare:
     get:
       summary: Your GET endpoint
       tags: []
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicePrepareOutput'
+                $ref: "#/components/schemas/InvoicePrepareOutput"
       operationId: get-invoices-attended-prepare
       parameters:
         - schema:
             type: string
           in: query
           name: qr_code
-          description: 'Qr code value '
+          description: "Qr code value "
         - schema:
             type: string
           in: query
@@ -298,9 +298,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/InvoicesRejectInput'
+              $ref: "#/components/schemas/InvoicesRejectInput"
       responses:
-        '201':
+        "201":
           description: No content
   /terms:
     get:
@@ -308,12 +308,12 @@ paths:
         - Terms
       summary: Get user terms and conditions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/UserTermsOutput'
+                $ref: "#/components/schemas/UserTermsOutput"
 components:
   schemas:
     ConfigurationOutput:
