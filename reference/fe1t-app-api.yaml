@@ -66,6 +66,29 @@ paths:
       responses:
         '201':
           description: No content
+  /fuelcoupons/abort:
+    delete:
+      summary: ''
+      operationId: delete-fuelcoupons-abort
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericTransactionOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_code:
+                  type: string
+                  x-stoplight:
+                    id: 0bfwj7iw2oet0
+      tags:
+        - Fuelcoupons
   /fuelstations:
     get:
       tags:
@@ -866,3 +889,21 @@ components:
           type: boolean
         third_parties:
           type: boolean
+    GenericTransactionOutput:
+      title: GenericTransactionOutput
+      x-stoplight:
+        id: co8m3bn7ihdla
+      type: object
+      properties:
+        action_code:
+          type: string
+          x-stoplight:
+            id: lj2f93airs0g1
+        display:
+          type: array
+          x-stoplight:
+            id: x445ywyhjixgp
+          items:
+            x-stoplight:
+              id: iwnukxdyhat1j
+            type: string
