@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: "0.1"
+  version: '0.1'
 servers:
-  - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
+  - url: 'https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1'
     description: Development
-  - url: "https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1"
+  - url: 'https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1'
     description: Production
 paths:
   /configuration:
@@ -14,12 +14,12 @@ paths:
         - Configuration
       summary: Get app first configuration
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConfigurationOutput"
+                $ref: '#/components/schemas/ConfigurationOutput'
   /customers:
     get:
       tags:
@@ -39,13 +39,13 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CustomersOutput"
-  "/customers/{id}":
+                $ref: '#/components/schemas/CustomersOutput'
+  '/customers/{id}':
     put:
       tags:
         - Customers
@@ -62,9 +62,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CustomersInput"
+              $ref: '#/components/schemas/CustomersInput'
       responses:
-        "201":
+        '201':
           description: No content
   /fuelstations:
     get:
@@ -72,13 +72,13 @@ paths:
         - Fuelstations
       summary: Get users enabled fuelstations
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FuelstationsOutput"
-  "/fuelstations/{fuelstation_id}/prices":
+                $ref: '#/components/schemas/FuelstationsOutput'
+  '/fuelstations/{fuelstation_id}/prices':
     get:
       tags:
         - Prices
@@ -91,12 +91,12 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PricesOutput"
+                $ref: '#/components/schemas/PricesOutput'
     put:
       tags:
         - Prices
@@ -113,15 +113,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PricesInput"
+              $ref: '#/components/schemas/PricesInput'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PricesOutput"
-  "/fuelstations/{fuelstation_id}":
+                $ref: '#/components/schemas/PricesOutput'
+  '/fuelstations/{fuelstation_id}':
     get:
       tags:
         - Fuelstations
@@ -134,12 +134,12 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FuelstationsSettingsOutput"
+                $ref: '#/components/schemas/FuelstationsSettingsOutput'
     put:
       tags:
         - Fuelstations
@@ -156,10 +156,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/FuelstationSettingsInput"
+              $ref: '#/components/schemas/FuelstationSettingsInput'
       responses:
-        "201":
+        '201':
           description: No content
+  '/fuelstations/{fuelstation_id}/pumps/{pump_number}/supplies':
+    parameters:
+      - schema:
+          type: string
+        name: fuelstation_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: pump_number
+        in: path
+        required: true
+    get:
+      summary: Retrieve supplies list
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSuppliesOutput'
+      operationId: get-fuelstation-fuelstation_id-pumps-pump_number-supplies
   /invoices:
     get:
       tags:
@@ -179,13 +202,26 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InvoicesSearchOutput"
-  "/invoices/{invoice_id}/details":
+                $ref: '#/components/schemas/InvoicesSearchOutput'
+    put:
+      summary: Insert invoice request
+      operationId: put-invoices
+      responses:
+        '204':
+          description: No Content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsertInvoiceInput'
+      tags:
+        - Invoices
+  '/invoices/{invoice_id}/details':
     get:
       tags:
         - Invoices
@@ -198,13 +234,13 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InvoiceDetailsOutput"
-  "/invoices/{invoice_id}/details/{detail_id}":
+                $ref: '#/components/schemas/InvoiceDetailsOutput'
+  '/invoices/{invoice_id}/details/{detail_id}':
     put:
       tags:
         - Invoices
@@ -227,11 +263,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InvoiceDetailInput"
+              $ref: '#/components/schemas/InvoiceDetailInput'
       responses:
-        "201":
+        '201':
           description: No content
-  "/invoices/{invoice_id}/details/{detail_id}/reject":
+  '/invoices/{invoice_id}/details/{detail_id}/reject':
     post:
       tags:
         - Invoices
@@ -250,7 +286,7 @@ paths:
           schema:
             type: integer
       responses:
-        "201":
+        '201':
           description: No content
   /invoices/approve:
     post:
@@ -262,28 +298,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InvoicesApproveInput"
+              $ref: '#/components/schemas/InvoicesApproveInput'
       responses:
-        "201":
+        '201':
           description: No content
   /invoices/attended/prepare:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Get data to prepare invoice
+      tags:
+        - Invoices
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InvoicePrepareOutput"
+                $ref: '#/components/schemas/InvoicePrepareOutput'
       operationId: get-invoices-attended-prepare
       parameters:
         - schema:
             type: string
           in: query
           name: qr_code
-          description: "Qr code value "
+          description: 'Qr code value '
         - schema:
             type: string
           in: query
@@ -298,9 +335,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InvoicesRejectInput"
+              $ref: '#/components/schemas/InvoicesRejectInput'
       responses:
-        "201":
+        '201':
           description: No content
   /terms:
     get:
@@ -308,12 +345,12 @@ paths:
         - Terms
       summary: Get user terms and conditions
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserTermsOutput"
+                $ref: '#/components/schemas/UserTermsOutput'
 components:
   schemas:
     ConfigurationOutput:
@@ -496,6 +533,46 @@ components:
                 - 1
                 - 2
                 - 3
+    GetSuppliesOutput:
+      title: GetSuppliesOutput
+      x-stoplight:
+        id: 9kopf9i8em68n
+      type: object
+      properties:
+        supplies:
+          type: array
+          x-stoplight:
+            id: 18xcwa8hthytz
+          items:
+            x-stoplight:
+              id: em2qwzemo04uq
+            type: object
+            properties:
+              datetime:
+                type: string
+                x-stoplight:
+                  id: bf3moqukkt7pe
+                format: date-time
+              amount:
+                type: number
+                x-stoplight:
+                  id: t6fx1nsskpnmo
+              unit_price:
+                type: number
+                x-stoplight:
+                  id: fjdqoiii1t89t
+              article_code:
+                type: integer
+                x-stoplight:
+                  id: 38u1qqott09pm
+              quantity:
+                type: number
+                x-stoplight:
+                  id: tobtwh7k8ib6k
+              computer_station_tran_id:
+                type: integer
+                x-stoplight:
+                  id: 9iu3aclfpe5km
     InvoicesSearchOutput:
       type: object
       properties:
@@ -635,6 +712,83 @@ components:
         transaction_timestamp:
           type: string
           format: date-time
+    InsertInvoiceInput:
+      title: InsertInvoiceInput
+      x-stoplight:
+        id: 4gh437vakw3ej
+      type: object
+      properties:
+        fuels_station_id:
+          type: integer
+          x-stoplight:
+            id: vn1258j241fgl
+        customer_id:
+          type: integer
+          x-stoplight:
+            id: m47ein06xb3vs
+        image:
+          type: string
+          x-stoplight:
+            id: 5vpgjlaaki3wu
+        details:
+          type: array
+          x-stoplight:
+            id: utuwqd01sy81a
+          items:
+            x-stoplight:
+              id: i2kzxg9z456su
+            type: object
+            properties:
+              payments:
+                type: array
+                x-stoplight:
+                  id: p2m5c8fudp0z8
+                items:
+                  x-stoplight:
+                    id: wk81mxp9kyojt
+                  type: object
+                  properties:
+                    payment_method_code:
+                      type: string
+                      x-stoplight:
+                        id: oz6o8a3l54xvw
+                    amount:
+                      type: number
+                      x-stoplight:
+                        id: a6rjpq93tfsjz
+              vehicle_id:
+                type: integer
+                x-stoplight:
+                  id: kahiyxr7p9yws
+              km:
+                type: integer
+                x-stoplight:
+                  id: 3enuuttejoozz
+              computer_station_tran_id:
+                type: integer
+                x-stoplight:
+                  id: o8s5wzeyccdc2
+              unit_price:
+                type: number
+                x-stoplight:
+                  id: 6x6p8y5sjdjz1
+              article_code:
+                type: integer
+                x-stoplight:
+                  id: en7c0u96z08eb
+              receipt_number:
+                type: string
+                x-stoplight:
+                  id: ec8t90nsdp6ff
+              total_amount:
+                type: number
+                x-stoplight:
+                  id: aerlsqanfwd4f
+              transaction_timestamp:
+                type: string
+                x-stoplight:
+                  id: bajrjlq6fjhb5
+                format: date-time
     InvoicePrepareOutput:
       title: InvoicePrepareOutput
       x-stoplight:
