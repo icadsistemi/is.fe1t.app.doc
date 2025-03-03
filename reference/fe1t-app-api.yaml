@@ -127,6 +127,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/FuelCouponAutoReversalInput'
+      tags:
+        - Fuelcoupons
   /fuelcoupons/reversal/info:
     get:
       summary: Get reversal info
@@ -194,6 +196,8 @@ paths:
                     x-stoplight:
                       id: ljz3o03m7nlo2
                     type: string
+      tags:
+        - Fuelcoupons
   /fuelcoupons/transactions:
     post:
       summary: ''
