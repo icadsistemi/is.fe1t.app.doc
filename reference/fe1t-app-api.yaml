@@ -68,7 +68,7 @@ paths:
           description: No content
   /fuelcoupons/abort:
     delete:
-      summary: ''
+      summary: Abort fuel coupon transaction
       operationId: delete-fuelcoupons-abort
       responses:
         '200':
@@ -89,6 +89,156 @@ paths:
                     id: 0bfwj7iw2oet0
       tags:
         - Fuelcoupons
+      description: |
+        Used to abort a fuel coupon transaction. It's used if the validation phase is interrupted.
+  /fuelcoupons/activate:
+    post:
+      summary: Activate fuelcoupons
+      operationId: post-fuelcoupons-activate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericTransactionOutput'
+      tags:
+        - Fuelcoupons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FuelCouponActivateInput'
+  /fuelcoupons/reversal/auto:
+    post:
+      summary: Automatic reversal fuelcoupon transaction
+      operationId: post-fuelcoupons-reversal-auto
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericTransactionOutput'
+      description: |
+        The endpoint is used to automatically reverse a fuel coupon transaction.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FuelCouponAutoReversalInput'
+  /fuelcoupons/reversal/info:
+    get:
+      summary: Get reversal info
+      tags:
+        - Fuelcoupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReversalInfoOutput'
+      operationId: get-fuelcoupons-reversal-info
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: fuelcoupon_code
+          description: Fuelcoupon full code
+          required: true
+  /fuelcoupons/reversal:
+    post:
+      summary: Reversal fuel coupon transaction
+      operationId: post-fuelcoupons-reversal
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericTransactionOutput'
+      description: |
+        Send transactionid for reversal fuelcoupon request
+      tags:
+        - Fuelcoupons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FuelCouponReversalInput'
+  /fuelcoupons/reversal/validate:
+    post:
+      summary: ''
+      operationId: post-fuelcoupons-reversal-validate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericTransactionOutput'
+      description: |
+        Used to validate a fuel ccoupon before a reversal operation.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fuelcoupons_codes:
+                  type: array
+                  x-stoplight:
+                    id: wzdbb24emzcnr
+                  items:
+                    x-stoplight:
+                      id: ljz3o03m7nlo2
+                    type: string
+  /fuelcoupons/transactions:
+    post:
+      summary: ''
+      operationId: post-fuelcoupons-transactions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FuelCouponTransactionOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FuelCouponTransactionInput'
+      tags:
+        - Fuelcoupons
+  /fuelcoupons/validate:
+    post:
+      summary: Validate fuelcoupon
+      operationId: post-fuelcoupons-validate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericTransactionOutput'
+      tags:
+        - Fuelcoupons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fuelcoupon_code:
+                  type: string
+                  x-stoplight:
+                    id: kcis5lgtfgrh0
+                transaction_code:
+                  type: string
+                  x-stoplight:
+                    id: 2n24kjqc8jsa1
   /fuelstations:
     get:
       tags:
@@ -101,6 +251,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FuelstationsOutput'
+  '/fuelstations/{fuelstation_id}':
+    get:
+      tags:
+        - Fuelstations
+      summary: Get fuelstation settings
+      parameters:
+        - name: fuelstation_id
+          in: path
+          description: Fuelstation id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FuelstationsSettingsOutput'
+    put:
+      tags:
+        - Fuelstations
+      summary: Update fuelstation settings
+      parameters:
+        - name: fuelstation_id
+          in: path
+          description: Fuelstation id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FuelstationSettingsInput'
+      responses:
+        '201':
+          description: No content
   '/fuelstations/{fuelstation_id}/prices':
     get:
       tags:
@@ -144,45 +333,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PricesOutput'
-  '/fuelstations/{fuelstation_id}':
-    get:
-      tags:
-        - Fuelstations
-      summary: Get fuelstation settings
-      parameters:
-        - name: fuelstation_id
-          in: path
-          description: Fuelstation id
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FuelstationsSettingsOutput'
-    put:
-      tags:
-        - Fuelstations
-      summary: Update fuelstation settings
-      parameters:
-        - name: fuelstation_id
-          in: path
-          description: Fuelstation id
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FuelstationSettingsInput'
-      responses:
-        '201':
-          description: No content
   '/fuelstations/{fuelstation_id}/pumps/{pump_number}/supplies':
     parameters:
       - schema:
@@ -197,7 +347,8 @@ paths:
         required: true
     get:
       summary: Retrieve supplies list
-      tags: []
+      tags:
+        - Supplies
       responses:
         '200':
           description: OK
@@ -206,6 +357,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetSuppliesOutput'
       operationId: get-fuelstation-fuelstation_id-pumps-pump_number-supplies
+  '/fuelstations/{fuelstation_id}/services':
+    parameters:
+      - schema:
+          type: string
+        name: fuelstation_id
+        in: path
+        required: true
+    get:
+      summary: Fuel station services
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-fuelstations-fuelstation_id-services
+      description: Get active services for the selected fuel stations
+      tags:
+        - Services
   /invoices:
     get:
       tags:
@@ -374,6 +546,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserTermsOutput'
+  '/versions/{platform}':
+    parameters:
+      - schema:
+          type: string
+        name: platform
+        in: path
+        required: true
+        description: Can be ios or android
+    get:
+      summary: Get the latest app version
+      tags:
+        - Versions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    x-stoplight:
+                      id: c4f2rqeogwwja
+                  version:
+                    type: string
+                    x-stoplight:
+                      id: auy1z7dzwyra6
+      operationId: get-versions-platform
 components:
   schemas:
     ConfigurationOutput:
@@ -381,39 +582,41 @@ components:
       properties:
         articles:
           type: array
-          items:
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
+          items: {}
         price_levels:
           type: array
-          items:
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
+          items: {}
         fuelstations_settings:
           type: object
           properties:
             unattended_photo_values:
               type: array
-              items:
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
+              items: {}
         payment_periodicities:
           type: array
+          items: {}
+        fuelcoupon_transactions:
+          type: array
+          x-stoplight:
+            id: 8u3459q5hvk9k
           items:
+            x-stoplight:
+              id: c3ijwozkjxumo
+            type: object
             properties:
-              id:
-                type: integer
-              name:
+              action_code:
                 type: string
+                x-stoplight:
+                  id: 2nq46how7509y
+              message:
+                type: string
+                x-stoplight:
+                  id: 4lud4hjsfszq6
+              is_error:
+                type: boolean
+                x-stoplight:
+                  id: rowgkdui39gsv
+                description: True if this action code and message pair stands for an error
     CustomersOutput:
       type: object
       properties:
@@ -474,6 +677,203 @@ components:
           type: boolean
         is_no_profit:
           type: boolean
+    FuelCouponActivateInput:
+      title: FuelCouponActivateInput
+      x-stoplight:
+        id: avnmh5kpn5toz
+      type: object
+      properties:
+        fuelcoupon_codes:
+          type: array
+          x-stoplight:
+            id: h8w357kd4okhv
+          items:
+            x-stoplight:
+              id: 1p0c69ewnzmz4
+            type: string
+        stan:
+          type: integer
+          x-stoplight:
+            id: amk7w88r6ex8b
+    FuelCouponAutoReversalInput:
+      title: FuelCouponAutoReversalInput
+      x-stoplight:
+        id: 5vyiphqbfvz84
+      type: object
+      properties:
+        receipt_number:
+          type: integer
+          x-stoplight:
+            id: hgzenj1d0i00g
+        original_transaction_code:
+          type: string
+          x-stoplight:
+            id: pv857lneyoduc
+        original_transaction_date_time:
+          type: string
+          x-stoplight:
+            id: x9gburafftt0z
+          format: date-time
+        stan:
+          type: integer
+          x-stoplight:
+            id: huf2aeu3x0128
+    FuelCouponReversalInput:
+      title: FuelCouponReversalInput
+      x-stoplight:
+        id: 8jwp3fgdj179g
+      type: object
+      properties:
+        id:
+          type: string
+    FuelCouponTransactionInput:
+      title: FuelCouponTransactionInput
+      x-stoplight:
+        id: hse2obbuwhsff
+      type: object
+      properties:
+        transaction_number:
+          type: integer
+          x-stoplight:
+            id: i2ubxzqymlu84
+        transaction_code:
+          type: string
+          x-stoplight:
+            id: m89kxxsor36fz
+        supplies_ov_ids:
+          type: array
+          x-stoplight:
+            id: tsbfh3apcfdq9
+          items:
+            x-stoplight:
+              id: k90r97ucu28du
+            type: integer
+        articles:
+          type: array
+          x-stoplight:
+            id: g3hjicxfe7fmn
+          items:
+            x-stoplight:
+              id: x7sgmhslosv7u
+            type: object
+            properties:
+              code:
+                type: string
+                x-stoplight:
+                  id: ato4lo3hdopnk
+              quantity:
+                type: string
+                x-stoplight:
+                  id: 1nlufsxmbfj08
+              unit_price:
+                type: string
+                x-stoplight:
+                  id: ucbmvpbrjnwwc
+              amount:
+                type: string
+                x-stoplight:
+                  id: p02qskal0zguf
+              is_oil:
+                type: boolean
+                x-stoplight:
+                  id: kjg4qxs3dh44h
+              discount_value:
+                type: number
+                x-stoplight:
+                  id: hnoptlcwvqxa6
+              discount_amount:
+                type: number
+                x-stoplight:
+                  id: geoy74dr5qzoa
+        date_time:
+          type: string
+          x-stoplight:
+            id: j5u4gjeo6vj72
+          format: date-time
+        stan:
+          type: integer
+          x-stoplight:
+            id: b1ch4ath39rw9
+    FuelCouponTransactionOutput:
+      title: FuelCouponTransactionOutput
+      x-stoplight:
+        id: 40hlw5v80d7wh
+      type: object
+      properties:
+        action_coe:
+          type: string
+          x-stoplight:
+            id: 1pg4u6c75bbkk
+        transactions:
+          type: array
+          x-stoplight:
+            id: cxbzceczoh1mg
+          items:
+            x-stoplight:
+              id: hfk2auc8qjty2
+            type: object
+            properties:
+              article_id:
+                type: integer
+                x-stoplight:
+                  id: j8r8j8y8uq3pg
+              article_code:
+                type: string
+                x-stoplight:
+                  id: bz5olytgaxk1b
+              article_name:
+                type: string
+                x-stoplight:
+                  id: 2p8uqtse111fg
+              quantity:
+                type: number
+                x-stoplight:
+                  id: j9iuaa6edzg5y
+              unit_price:
+                type: number
+                x-stoplight:
+                  id: pxxu4jhcgo1a7
+              amount:
+                type: number
+                x-stoplight:
+                  id: jo8zyed8vtc3h
+              is_oil:
+                type: boolean
+                x-stoplight:
+                  id: 6jsfyefnaaw1n
+              ov_supply_id:
+                type: integer
+                x-stoplight:
+                  id: 5870akbkl97n8
+              measure_unit:
+                type: string
+                x-stoplight:
+                  id: 56vwxhdy05ob1
+              payment_name:
+                type: string
+                x-stoplight:
+                  id: pvfusy5mmvm9i
+              fuelcoupon_code:
+                type: integer
+                x-stoplight:
+                  id: x5bu0kkdh4hg3
+              fuelcoupon_number:
+                type: string
+                x-stoplight:
+                  id: 6rck52wgkcwye
+              stan:
+                type: integer
+                x-stoplight:
+                  id: ux00i2dhwj3l5
+              date_time:
+                type: string
+                x-stoplight:
+                  id: er0shy7dholni
+                format: date-time
+              progressive_number:
+                type: integer
+                x-stoplight:
+                  id: ltqsgrz00bkeh
     FuelstationsOutput:
       type: object
       properties:
@@ -556,6 +956,16 @@ components:
                 - 1
                 - 2
                 - 3
+    GenericTransactionOutput:
+      title: GenericTransactionOutput
+      x-stoplight:
+        id: co8m3bn7ihdla
+      type: object
+      properties:
+        action_code:
+          type: string
+          x-stoplight:
+            id: lj2f93airs0g1
     GetSuppliesOutput:
       title: GetSuppliesOutput
       x-stoplight:
@@ -878,6 +1288,90 @@ components:
           type: string
         price:
           type: number
+    ReversalInfoOutput:
+      title: ReversalnIfoOutput
+      x-stoplight:
+        id: iu6yagp0k7s4x
+      type: object
+      properties:
+        update_required:
+          type: boolean
+          x-stoplight:
+            id: zls91rx7d8mq5
+        total_amount:
+          type: number
+          x-stoplight:
+            id: 6p5bdm3mzoqt6
+        original_transaction_amount:
+          type: number
+          x-stoplight:
+            id: g0ssat4iacqg4
+        original_transaction_date_time:
+          type: string
+          x-stoplight:
+            id: b4irykx6vqb8s
+          format: date-time
+        supplies:
+          type: array
+          x-stoplight:
+            id: 47nqrf89hlgep
+          items:
+            x-stoplight:
+              id: wdsasedywzu3v
+            type: array
+            items:
+              x-stoplight:
+                id: t34gxdirlkaa7
+              type: object
+              properties:
+                article_name:
+                  type: string
+                  x-stoplight:
+                    id: 50kydn5nsvtwg
+                amount:
+                  type: number
+                  x-stoplight:
+                    id: gapknq7zba3bv
+                unit_price:
+                  type: number
+                  x-stoplight:
+                    id: bc2exxy5lzxps
+                quantity:
+                  type: number
+                  x-stoplight:
+                    id: n7o6dp1a9ekih
+                is_oil:
+                  type: boolean
+                  x-stoplight:
+                    id: b6weq9uppgct7
+                fuelcoupon_id:
+                  type: integer
+                  x-stoplight:
+                    id: rnmkjfgy4lmym
+                fuelcoupon_number:
+                  type: string
+                  x-stoplight:
+                    id: tytsnmc5td5u5
+    ServicesOutput:
+      title: ServicesOutput
+      x-stoplight:
+        id: qytwipqxdc97y
+      type: object
+      properties:
+        services:
+          type: object
+          x-stoplight:
+            id: tksx7t2sga70g
+          properties:
+            fuelcoupon:
+              type: object
+              x-stoplight:
+                id: jbain1wsqdyhg
+              properties:
+                is_active:
+                  type: boolean
+                  x-stoplight:
+                    id: liqasj2odpmhp
     UserTermsOutput:
       type: object
       properties:
@@ -889,21 +1383,3 @@ components:
           type: boolean
         third_parties:
           type: boolean
-    GenericTransactionOutput:
-      title: GenericTransactionOutput
-      x-stoplight:
-        id: co8m3bn7ihdla
-      type: object
-      properties:
-        action_code:
-          type: string
-          x-stoplight:
-            id: lj2f93airs0g1
-        display:
-          type: array
-          x-stoplight:
-            id: x445ywyhjixgp
-          items:
-            x-stoplight:
-              id: iwnukxdyhat1j
-            type: string
