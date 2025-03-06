@@ -387,18 +387,23 @@ paths:
         - Invoices
       summary: Search invoices
       parameters:
-        - name: fuelstation_id
+        - name: date_from
           in: query
-          description: Fuelstation id
+          description: Start datetime range
           required: false
           schema:
             type: integer
-        - name: status
-          in: query
-          description: Invoice status
+        - in: query
           required: false
           schema:
             type: string
+          name: date_to
+          description: End datetime range
+        - schema:
+            type: string
+          in: query
+          name: status
+          description: Invoice status
       responses:
         '200':
           description: OK
@@ -465,6 +470,26 @@ paths:
       responses:
         '201':
           description: No content
+  '/invoices/{invoice_id}/details/{detail_id}/approve':
+    parameters:
+      - schema:
+          type: string
+        name: invoice_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: detail_id
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-invoices-invoice_id-details-detail_id-approve
+      responses:
+        '201':
+          description: Created
+      tags:
+        - Invoices
   '/invoices/{invoice_id}/details/{detail_id}/reject':
     post:
       tags:
