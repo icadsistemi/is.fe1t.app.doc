@@ -376,8 +376,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: '#/components/schemas/ServicesOutput'
       operationId: get-fuelstations-fuelstation_id-services
       description: Get active services for the selected fuel stations
       tags:
