@@ -610,7 +610,12 @@ components:
       properties:
         articles:
           type: array
-          items: {}
+          items:
+            properties:
+              code:
+                type: string
+              name:
+                type: string
         price_levels:
           type: array
           items:
