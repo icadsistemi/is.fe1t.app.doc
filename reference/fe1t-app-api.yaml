@@ -616,6 +616,8 @@ components:
                 type: string
               name:
                 type: string
+              is_oil:
+                type: boolean
         price_levels:
           type: array
           items:
