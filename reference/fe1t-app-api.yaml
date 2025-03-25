@@ -952,11 +952,7 @@ components:
             articles:
               type: array
               items:
-                properties:
-                  code:
-                    type: string
-                  name:
-                    type: string
+                type: string
     FuelstationSettingsInput:
       type: object
       properties:
