@@ -64,7 +64,7 @@ paths:
             schema:
               $ref: '#/components/schemas/CustomersInput'
       responses:
-        '201':
+        '204':
           description: No content
   /fuelcoupons/abort:
     delete:
