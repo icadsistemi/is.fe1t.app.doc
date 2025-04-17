@@ -45,6 +45,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomersOutput'
+    post:
+      summary: ''
+      operationId: post-customers
+      responses:
+        '201':
+          description: Created
+      description: Create a new customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerInput'
   '/customers/{id}':
     put:
       tags:
@@ -724,6 +736,52 @@ components:
           type: string
           x-stoplight:
             id: 7n4agtxrloej7
+    CreateCustomerInput:
+      type: object
+      x-stoplight:
+        id: 5leco94a00ljo
+      title: CustomerCreateInput
+      properties:
+        name:
+          type: string
+        vat_number:
+          type: string
+        fiscal_code:
+          type: string
+          x-stoplight:
+            id: p9ulh4s6q0ic9
+        sdi_code:
+          type: string
+        pec:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip_code:
+          type: string
+        telephone:
+          type: string
+        email:
+          type: string
+        payment_periodicity_id:
+          type: integer
+        has_split_payment:
+          type: boolean
+          x-stoplight:
+            id: j9sfnp0akvx2w
+        is_no_profit:
+          type: boolean
+        supplier_id:
+          type: number
+          x-stoplight:
+            id: 7n4agtxrloej7
+        code:
+          type: string
+          x-stoplight:
+            id: hyr50bgqvbrfj
     FuelCouponActivateInput:
       title: FuelCouponActivateInput
       x-stoplight:
