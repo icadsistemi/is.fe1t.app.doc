@@ -331,12 +331,11 @@ paths:
             schema:
               $ref: '#/components/schemas/PricesInput'
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PricesOutput'
+        '201':
+          description: Created
+          content: {}
+        '204':
+          description: No Content
   '/fuelstations/{fuelstation_id}/pumps/{pump_number}/supplies':
     parameters:
       - schema:
@@ -1312,20 +1311,34 @@ components:
                 type: string
     PricesOutput:
       type: object
+      x-examples:
+        Example 1:
+          prices:
+            - service_level: 0
+              product_code: string
+              price: 0
+              id: 0
       properties:
         prices:
           type: array
           items:
+            type: object
             properties:
+              id:
+                type: integer
               service_level:
                 type: integer
               product_code:
                 type: string
               price:
-                type: number
+                type: integer
     PricesInput:
       type: object
       properties:
+        id:
+          type: number
+          x-stoplight:
+            id: s7cycqww15993
         service_level:
           type: integer
         product_code:
