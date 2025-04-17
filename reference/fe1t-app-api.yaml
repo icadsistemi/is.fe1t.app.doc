@@ -46,12 +46,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomersOutput'
     post:
-      summary: ''
-      operationId: post-customers
+      summary: Create customer
+      operationId: ''
       responses:
         '201':
           description: Created
-      description: Create a new customer
+      description: ''
       requestBody:
         content:
           application/json:
