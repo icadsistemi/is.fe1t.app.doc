@@ -587,6 +587,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserTermsOutput'
+    put:
+      summary: Edit user terms and conditions
+      operationId: put-terms
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTermsInput'
   '/versions/{platform}':
     parameters:
       - schema:
@@ -1483,6 +1494,19 @@ components:
                     id: liqasj2odpmhp
     UserTermsOutput:
       type: object
+      properties:
+        app_privacy:
+          type: boolean
+        terms_and_conditions:
+          type: boolean
+        marketing:
+          type: boolean
+        third_parties:
+          type: boolean
+    UserTermsInput:
+      type: object
+      x-stoplight:
+        id: 6lbuc54u0r5es
       properties:
         app_privacy:
           type: boolean
