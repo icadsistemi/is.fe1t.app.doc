@@ -589,7 +589,7 @@ paths:
                 $ref: '#/components/schemas/UserTermsOutput'
     put:
       summary: Edit user terms and conditions
-      operationId: put-terms
+      operationId: ''
       responses:
         '200':
           description: OK
@@ -598,6 +598,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserTermsInput'
+      tags:
+        - Terms
   '/versions/{platform}':
     parameters:
       - schema:
