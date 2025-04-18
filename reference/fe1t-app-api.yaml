@@ -776,14 +776,6 @@ components:
             id: j9sfnp0akvx2w
         is_no_profit:
           type: boolean
-        supplier_id:
-          type: number
-          x-stoplight:
-            id: 7n4agtxrloej7
-        code:
-          type: string
-          x-stoplight:
-            id: hyr50bgqvbrfj
     FuelCouponActivateInput:
       title: FuelCouponActivateInput
       x-stoplight:
