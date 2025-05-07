@@ -1267,7 +1267,7 @@ components:
           type: integer
           x-stoplight:
             id: m47ein06xb3vs
-        image:
+        image_data:
           type: string
           x-stoplight:
             id: 5vpgjlaaki3wu
