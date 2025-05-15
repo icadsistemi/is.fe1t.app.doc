@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: '0.1'
+  version: '0.2'
 servers:
   - url: 'https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1'
     description: Development
@@ -80,6 +80,27 @@ paths:
       responses:
         '204':
           description: No content
+  '/customers/{id}/vehicle':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    post:
+      summary: Create vehicle
+      operationId: post-customers-id-vehicle
+      responses:
+        '201':
+          description: Created
+      description: Used to create a new vehicle for the input customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleInput'
+      tags:
+        - Vehicles
   /fuelcoupons/abort:
     delete:
       summary: Abort fuel coupon transaction
@@ -1346,30 +1367,34 @@ components:
               x-stoplight:
                 id: 4u43mg75tdpnp
         vehicles:
-          type: object
+          type: array
           x-stoplight:
             id: v1dd2pvvljuwv
-          properties:
-            id:
-              type: integer
-              x-stoplight:
-                id: liysnapjc5930
-            name:
-              type: string
-              x-stoplight:
-                id: w4t8gorr3lqn4
-            plate:
-              type: string
-              x-stoplight:
-                id: qczani13h2a12
-            products:
-              type: array
-              x-stoplight:
-                id: kzotdmj1pzcxm
-              items:
+          items:
+            x-stoplight:
+              id: m6pz169acwxn7
+            type: object
+            properties:
+              id:
+                type: integer
                 x-stoplight:
-                  id: dwpxsy13w59sc
+                  id: 6dfgii92oppfg
+              name:
                 type: string
+                x-stoplight:
+                  id: 9ebn1bq7t3p09
+              plate:
+                type: string
+                x-stoplight:
+                  id: icat42slij4yf
+              articles:
+                type: array
+                x-stoplight:
+                  id: duqg0mrnr5uht
+                items:
+                  x-stoplight:
+                    id: ochojfkumffgf
+                  type: string
     PricesOutput:
       type: object
       x-examples:
@@ -1514,3 +1539,30 @@ components:
           type: boolean
         third_parties:
           type: boolean
+    VehicleInput:
+      title: VehicleInput
+      x-stoplight:
+        id: 3pimzg9dr6usj
+      type: object
+      properties:
+        model:
+          type: string
+          x-stoplight:
+            id: 3mu8u9mr0b2pk
+        plate:
+          type: string
+          x-stoplight:
+            id: mh0mawbfd12e3
+        enabled_articles:
+          type: array
+          x-stoplight:
+            id: 23uukkjeis4x8
+          description: Array of IS product codes. String to be ready to eventually manage non oil
+          items:
+            x-stoplight:
+              id: 9700gh5ryysju
+            type: string
+        is_enabled:
+          type: boolean
+          x-stoplight:
+            id: p1uudycwrebho
