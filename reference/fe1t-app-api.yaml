@@ -1562,7 +1562,3 @@ components:
             x-stoplight:
               id: 9700gh5ryysju
             type: string
-        is_enabled:
-          type: boolean
-          x-stoplight:
-            id: p1uudycwrebho
