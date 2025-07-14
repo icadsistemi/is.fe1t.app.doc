@@ -101,6 +101,35 @@ paths:
               $ref: '#/components/schemas/VehicleInput'
       tags:
         - Vehicles
+  /customers/search:
+    get:
+      summary: Get a list of customers
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomersOutput'
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          description: Internal Server Error
+      operationId: get-customers-search
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          description: Partial or complete customer name
+          required: true
+      description: The lambda returns a list of customers whose names contain the input string
   /fuelcoupons/abort:
     delete:
       summary: Abort fuel coupon transaction
