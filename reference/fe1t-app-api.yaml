@@ -114,7 +114,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CustomersOutput'
+                  $ref: '#/components/schemas/CustomersListOutput'
         '403':
           description: Forbidden
         '422':
@@ -760,6 +760,51 @@ components:
           type: boolean
         '':
           type: string
+          x-stoplight:
+            id: b7f90fjcnffs5
+    CustomersListOutput:
+      type: object
+      x-stoplight:
+        id: dlpuknz0qv3cb
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        vat_number:
+          type: string
+        fiscal_code:
+          type: string
+          x-stoplight:
+            id: 7h3jav4jesodu
+        sdi_code:
+          type: string
+        pec:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        zip_code:
+          type: string
+        phone_number:
+          type: string
+          x-stoplight:
+            id: ck481d9ht4y9d
+        email:
+          type: string
+        payment_periodicity_id:
+          type: integer
+        has_split_payment:
+          type: boolean
+          x-stoplight:
+            id: x1xeijzea1yoo
+        is_no_profit:
+          type: boolean
+        country_id:
+          type: number
           x-stoplight:
             id: b7f90fjcnffs5
     CustomersInput:
