@@ -679,6 +679,41 @@ paths:
                     x-stoplight:
                       id: auy1z7dzwyra6
       operationId: get-versions-platform
+  /users/profile:
+    get:
+      summary: Gets user profile
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileOutput'
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          description: Internal Server Error
+      operationId: get-users-profile
+    parameters: []
+    put:
+      summary: Inserts a new user profile or updates an already present one
+      operationId: put-users-profile
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileInput'
+        description: ''
 components:
   schemas:
     ConfigurationOutput:
@@ -1636,3 +1671,42 @@ components:
             x-stoplight:
               id: 9700gh5ryysju
             type: string
+    UserProfileOutput:
+      type: object
+      properties:
+        user_profile:
+          type: object
+          properties:
+            username:
+              type: string
+            favourite_customers:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  vat_number:
+                    type: string
+                  fiscal_code:
+                    type: string
+    UserProfileInput:
+      type: object
+      properties:
+        favourite_customers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              vat_code:
+                type: string
+              vat_number:
+                type: string
+              fiscal_code:
+                type: string
