@@ -681,8 +681,9 @@ paths:
       operationId: get-versions-platform
   /users/profile:
     get:
-      summary: Gets user profile
-      tags: []
+      summary: GET user profile
+      tags:
+        - Users
       responses:
         '200':
           description: OK
@@ -699,7 +700,9 @@ paths:
       operationId: get-users-profile
     parameters: []
     put:
-      summary: Inserts a new user profile or updates an already present one
+      summary: PUT user profile
+      tags:
+        - Users
       operationId: put-users-profile
       responses:
         '200':
@@ -1692,6 +1695,7 @@ components:
                     type: string
                   fiscal_code:
                     type: string
+      x-examples: {}
     UserProfileInput:
       type: object
       properties:
@@ -1710,3 +1714,4 @@ components:
                 type: string
               fiscal_code:
                 type: string
+      x-examples: {}
