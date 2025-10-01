@@ -615,7 +615,7 @@ paths:
     post:
       tags:
         - Invoices
-      summary: Reset invoice status to pending
+      summary: Reset invoice status to "to be approved"
       requestBody:
         required: true
         content:
