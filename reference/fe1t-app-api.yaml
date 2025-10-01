@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: '0.2'
+  version: "0.2"
 servers:
-  - url: 'https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1'
+  - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
     description: Development
-  - url: 'https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1'
+  - url: "https://mxp-public-fe1t-app-api.prod.icadsistemi.com/v1"
     description: Production
 paths:
   /configuration:
@@ -14,12 +14,12 @@ paths:
         - Configuration
       summary: Get app first configuration
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigurationOutput'
+                $ref: "#/components/schemas/ConfigurationOutput"
   /customers:
     get:
       tags:
@@ -39,27 +39,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomersOutput'
+                $ref: "#/components/schemas/CustomersOutput"
     post:
       summary: Create customer
-      operationId: ''
+      operationId: ""
       responses:
-        '201':
+        "201":
           description: Created
-      description: ''
+      description: ""
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCustomerInput'
+              $ref: "#/components/schemas/CreateCustomerInput"
       tags:
         - Customers
-  '/customers/{id}':
+  "/customers/{id}":
     put:
       tags:
         - Customers
@@ -76,11 +76,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomersInput'
+              $ref: "#/components/schemas/CustomersInput"
       responses:
-        '204':
+        "204":
           description: No content
-  '/customers/{id}/vehicle':
+  "/customers/{id}/vehicle":
     parameters:
       - schema:
           type: string
@@ -91,14 +91,14 @@ paths:
       summary: Create vehicle
       operationId: post-customers-id-vehicle
       responses:
-        '201':
+        "201":
           description: Created
       description: Used to create a new vehicle for the input customer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VehicleInput'
+              $ref: "#/components/schemas/VehicleInput"
       tags:
         - Vehicles
   /customers/search:
@@ -107,19 +107,19 @@ paths:
       tags:
         - Customers
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CustomersListOutput'
-        '403':
+                  $ref: "#/components/schemas/CustomersListOutput"
+        "403":
           description: Forbidden
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
-        '500':
+        "500":
           description: Internal Server Error
       operationId: get-customers-search
       parameters:
@@ -135,12 +135,12 @@ paths:
       summary: Abort fuel coupon transaction
       operationId: delete-fuelcoupons-abort
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericTransactionOutput'
+                $ref: "#/components/schemas/GenericTransactionOutput"
       requestBody:
         content:
           application/json:
@@ -160,37 +160,37 @@ paths:
       summary: Activate fuelcoupons
       operationId: post-fuelcoupons-activate
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericTransactionOutput'
+                $ref: "#/components/schemas/GenericTransactionOutput"
       tags:
         - Fuelcoupons
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FuelCouponActivateInput'
+              $ref: "#/components/schemas/FuelCouponActivateInput"
   /fuelcoupons/reversal/auto:
     post:
       summary: Automatic reversal fuelcoupon transaction
       operationId: post-fuelcoupons-reversal-auto
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericTransactionOutput'
+                $ref: "#/components/schemas/GenericTransactionOutput"
       description: |
         The endpoint is used to automatically reverse a fuel coupon transaction.
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FuelCouponAutoReversalInput'
+              $ref: "#/components/schemas/FuelCouponAutoReversalInput"
       tags:
         - Fuelcoupons
   /fuelcoupons/reversal/info:
@@ -199,12 +199,12 @@ paths:
       tags:
         - Fuelcoupons
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReversalInfoOutput'
+                $ref: "#/components/schemas/ReversalInfoOutput"
       operationId: get-fuelcoupons-reversal-info
       parameters:
         - schema:
@@ -218,12 +218,12 @@ paths:
       summary: Reversal fuel coupon transaction
       operationId: post-fuelcoupons-reversal
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericTransactionOutput'
+                $ref: "#/components/schemas/GenericTransactionOutput"
       description: |
         Send transactionid for reversal fuelcoupon request
       tags:
@@ -232,18 +232,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FuelCouponReversalInput'
+              $ref: "#/components/schemas/FuelCouponReversalInput"
   /fuelcoupons/reversal/validate:
     post:
-      summary: ''
+      summary: ""
       operationId: post-fuelcoupons-reversal-validate
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericTransactionOutput'
+                $ref: "#/components/schemas/GenericTransactionOutput"
       description: |
         Used to validate a fuel ccoupon before a reversal operation.
       requestBody:
@@ -264,20 +264,20 @@ paths:
         - Fuelcoupons
   /fuelcoupons/transactions:
     post:
-      summary: ''
+      summary: ""
       operationId: post-fuelcoupons-transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FuelCouponTransactionOutput'
+                $ref: "#/components/schemas/FuelCouponTransactionOutput"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FuelCouponTransactionInput'
+              $ref: "#/components/schemas/FuelCouponTransactionInput"
       tags:
         - Fuelcoupons
   /fuelcoupons/validate:
@@ -285,12 +285,12 @@ paths:
       summary: Validate fuelcoupon
       operationId: post-fuelcoupons-validate
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericTransactionOutput'
+                $ref: "#/components/schemas/GenericTransactionOutput"
       tags:
         - Fuelcoupons
       requestBody:
@@ -313,13 +313,13 @@ paths:
         - Fuelstations
       summary: Get users enabled fuelstations
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FuelstationsOutput'
-  '/fuelstations/{fuelstation_id}':
+                $ref: "#/components/schemas/FuelstationsOutput"
+  "/fuelstations/{fuelstation_id}":
     get:
       tags:
         - Fuelstations
@@ -332,12 +332,12 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FuelstationsSettingsOutput'
+                $ref: "#/components/schemas/FuelstationsSettingsOutput"
     put:
       tags:
         - Fuelstations
@@ -354,11 +354,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FuelstationSettingsInput'
+              $ref: "#/components/schemas/FuelstationSettingsInput"
       responses:
-        '201':
+        "201":
           description: No content
-  '/fuelstations/{fuelstation_id}/prices':
+  "/fuelstations/{fuelstation_id}/prices":
     get:
       tags:
         - Prices
@@ -371,12 +371,12 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PricesOutput'
+                $ref: "#/components/schemas/PricesOutput"
     put:
       tags:
         - Prices
@@ -393,14 +393,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PricesInput'
+              $ref: "#/components/schemas/PricesInput"
       responses:
-        '201':
+        "201":
           description: Created
           content: {}
-        '204':
+        "204":
           description: No Content
-  '/fuelstations/{fuelstation_id}/pumps/{pump_number}/supplies':
+  "/fuelstations/{fuelstation_id}/pumps/{pump_number}/supplies":
     parameters:
       - schema:
           type: string
@@ -417,14 +417,14 @@ paths:
       tags:
         - Supplies
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetSuppliesOutput'
+                $ref: "#/components/schemas/GetSuppliesOutput"
       operationId: get-fuelstation-fuelstation_id-pumps-pump_number-supplies
-  '/fuelstations/{fuelstation_id}/services':
+  "/fuelstations/{fuelstation_id}/services":
     parameters:
       - schema:
           type: string
@@ -434,12 +434,12 @@ paths:
     get:
       summary: Fuel station services
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServicesOutput'
+                $ref: "#/components/schemas/ServicesOutput"
       operationId: get-fuelstations-fuelstation_id-services
       description: Get active services for the selected fuel stations
       tags:
@@ -468,26 +468,26 @@ paths:
           name: status
           description: Invoice status
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicesSearchOutput'
+                $ref: "#/components/schemas/InvoicesSearchOutput"
     put:
       summary: Insert invoice request
       operationId: put-invoices
       responses:
-        '204':
+        "204":
           description: No Content
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InsertInvoiceInput'
+              $ref: "#/components/schemas/InsertInvoiceInput"
       tags:
         - Invoices
-  '/invoices/{invoice_id}/details':
+  "/invoices/{invoice_id}/details":
     get:
       tags:
         - Invoices
@@ -500,13 +500,13 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoiceDetailsOutput'
-  '/invoices/{invoice_id}/details/{detail_id}':
+                $ref: "#/components/schemas/InvoiceDetailsOutput"
+  "/invoices/{invoice_id}/details/{detail_id}":
     put:
       tags:
         - Invoices
@@ -529,11 +529,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InvoiceDetailInput'
+              $ref: "#/components/schemas/InvoiceDetailInput"
       responses:
-        '201':
+        "201":
           description: No content
-  '/invoices/{invoice_id}/details/{detail_id}/approve':
+  "/invoices/{invoice_id}/details/{detail_id}/approve":
     parameters:
       - schema:
           type: string
@@ -546,14 +546,14 @@ paths:
         in: path
         required: true
     post:
-      summary: ''
+      summary: ""
       operationId: post-invoices-invoice_id-details-detail_id-approve
       responses:
-        '201':
+        "201":
           description: Created
       tags:
         - Invoices
-  '/invoices/{invoice_id}/details/{detail_id}/reject':
+  "/invoices/{invoice_id}/details/{detail_id}/reject":
     post:
       tags:
         - Invoices
@@ -572,7 +572,7 @@ paths:
           schema:
             type: integer
       responses:
-        '201':
+        "201":
           description: No content
   /invoices/approve:
     post:
@@ -584,9 +584,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InvoicesApproveInput'
+              $ref: "#/components/schemas/InvoicesApproveInput"
       responses:
-        '201':
+        "201":
           description: No content
   /invoices/attended/prepare:
     get:
@@ -594,23 +594,42 @@ paths:
       tags:
         - Invoices
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicePrepareOutput'
+                $ref: "#/components/schemas/InvoicePrepareOutput"
       operationId: get-invoices-attended-prepare
       parameters:
         - schema:
             type: string
           in: query
           name: qr_code
-          description: 'Qr code value '
+          description: "Qr code value "
         - schema:
             type: string
           in: query
           name: customer_id
+  /invoices/status/reset:
+    post:
+      tags:
+        - Invoices
+      summary: Reset invoice status to pending
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invoices_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        "204":
+          description: Status reset
   /invoices/reject:
     post:
       tags:
@@ -621,9 +640,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InvoicesRejectInput'
+              $ref: "#/components/schemas/InvoicesRejectInput"
       responses:
-        '201':
+        "201":
           description: No content
   /terms:
     get:
@@ -631,26 +650,26 @@ paths:
         - Terms
       summary: Get user terms and conditions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserTermsOutput'
+                $ref: "#/components/schemas/UserTermsOutput"
     put:
       summary: Edit user terms and conditions
-      operationId: ''
+      operationId: ""
       responses:
-        '200':
+        "200":
           description: OK
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserTermsInput'
+              $ref: "#/components/schemas/UserTermsInput"
       tags:
         - Terms
-  '/versions/{platform}':
+  "/versions/{platform}":
     parameters:
       - schema:
           type: string
@@ -663,7 +682,7 @@ paths:
       tags:
         - Versions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -685,17 +704,17 @@ paths:
       tags:
         - Users
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserProfileOutput'
-        '404':
+                $ref: "#/components/schemas/UserProfileOutput"
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
-        '500':
+        "500":
           description: Internal Server Error
       operationId: get-users-profile
     parameters: []
@@ -705,18 +724,18 @@ paths:
         - Users
       operationId: put-users-profile
       responses:
-        '200':
+        "200":
           description: OK
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
-        '500':
+        "500":
           description: Internal Server Error
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserProfileInput'
-        description: ''
+              $ref: "#/components/schemas/UserProfileInput"
+        description: ""
 components:
   schemas:
     ConfigurationOutput:
@@ -796,7 +815,7 @@ components:
             id: x1xeijzea1yoo
         is_no_profit:
           type: boolean
-        '':
+        "":
           type: string
           x-stoplight:
             id: b7f90fjcnffs5
@@ -880,7 +899,7 @@ components:
             id: j9sfnp0akvx2w
         is_no_profit:
           type: boolean
-        '':
+        "":
           type: string
           x-stoplight:
             id: 7n4agtxrloej7
