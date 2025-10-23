@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: "0.2"
+  version: "0.2.1"
 servers:
   - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
     description: Development
@@ -658,7 +658,7 @@ paths:
                 $ref: "#/components/schemas/UserTermsOutput"
     put:
       summary: Edit user terms and conditions
-      operationId: ""
+      operationId: "tandc"
       responses:
         "200":
           description: OK
@@ -1280,6 +1280,8 @@ components:
               customer_name:
                 type: string
               customer_vat_number:
+                type: string
+              status_code:
                 type: string
               date_time:
                 type: string
