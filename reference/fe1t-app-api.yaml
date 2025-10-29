@@ -456,10 +456,12 @@ paths:
           required: false
           schema:
             type: integer
+            format: unixtime
         - in: query
           required: false
           schema:
-            type: string
+            type: integer
+            format: unixtime
           name: date_to
           description: End datetime range
         - schema:
@@ -676,7 +678,12 @@ paths:
         name: platform
         in: path
         required: true
-        description: Can be ios or android
+        examples:
+          ios:
+            value: ios
+          android:
+            value: android
+        description: Version platform
     get:
       summary: Get the latest app version
       tags:
