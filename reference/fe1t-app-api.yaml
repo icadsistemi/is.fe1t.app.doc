@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: "0.3.0"
+  version: "0.4.0"
 servers:
   - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
     description: Development
@@ -38,6 +38,11 @@ paths:
           required: false
           schema:
             type: string
+        - name: name
+          schema:
+            type: string
+          in: query
+          description: Partial or complete customer name
       responses:
         "200":
           description: OK
@@ -101,212 +106,6 @@ paths:
               $ref: "#/components/schemas/VehicleInput"
       tags:
         - Vehicles
-  /customers/search:
-    get:
-      summary: Get a list of customers
-      tags:
-        - Customers
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/CustomersListOutput"
-        "403":
-          description: Forbidden
-        "422":
-          description: Unprocessable Entity (WebDAV)
-        "500":
-          description: Internal Server Error
-      operationId: get-customers-search
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: name
-          description: Partial or complete customer name
-          required: true
-      description: The lambda returns a list of customers whose names contain the input string
-  /fuelcoupons/abort:
-    delete:
-      summary: Abort fuel coupon transaction
-      operationId: delete-fuelcoupons-abort
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericTransactionOutput"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                transaction_code:
-                  type: string
-                  x-stoplight:
-                    id: 0bfwj7iw2oet0
-      tags:
-        - Fuelcoupons
-      description: |
-        Used to abort a fuel coupon transaction. It's used if the validation phase is interrupted.
-  /fuelcoupons/activate:
-    post:
-      summary: Activate fuelcoupons
-      operationId: post-fuelcoupons-activate
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericTransactionOutput"
-      tags:
-        - Fuelcoupons
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FuelCouponActivateInput"
-  /fuelcoupons/reversal/auto:
-    post:
-      summary: Automatic reversal fuelcoupon transaction
-      operationId: post-fuelcoupons-reversal-auto
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericTransactionOutput"
-      description: |
-        The endpoint is used to automatically reverse a fuel coupon transaction.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FuelCouponAutoReversalInput"
-      tags:
-        - Fuelcoupons
-  /fuelcoupons/reversal/info:
-    get:
-      summary: Get reversal info
-      tags:
-        - Fuelcoupons
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReversalInfoOutput"
-      operationId: get-fuelcoupons-reversal-info
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: fuelcoupon_code
-          description: Fuelcoupon full code
-          required: true
-  /fuelcoupons/reversal:
-    post:
-      summary: Reversal fuel coupon transaction
-      operationId: post-fuelcoupons-reversal
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericTransactionOutput"
-      description: |
-        Send transactionid for reversal fuelcoupon request
-      tags:
-        - Fuelcoupons
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FuelCouponReversalInput"
-  /fuelcoupons/reversal/validate:
-    post:
-      summary: ""
-      operationId: post-fuelcoupons-reversal-validate
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericTransactionOutput"
-      description: |
-        Used to validate a fuel ccoupon before a reversal operation.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                fuelcoupons_codes:
-                  type: array
-                  x-stoplight:
-                    id: wzdbb24emzcnr
-                  items:
-                    x-stoplight:
-                      id: ljz3o03m7nlo2
-                    type: string
-      tags:
-        - Fuelcoupons
-  /fuelcoupons/transactions:
-    post:
-      summary: ""
-      operationId: post-fuelcoupons-transactions
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FuelCouponTransactionOutput"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FuelCouponTransactionInput"
-      tags:
-        - Fuelcoupons
-  /fuelcoupons/validate:
-    post:
-      summary: Validate fuelcoupon
-      operationId: post-fuelcoupons-validate
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericTransactionOutput"
-      tags:
-        - Fuelcoupons
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                fuelcoupon_code:
-                  type: string
-                  x-stoplight:
-                    id: kcis5lgtfgrh0
-                transaction_code:
-                  type: string
-                  x-stoplight:
-                    id: 2n24kjqc8jsa1
   /fuelstations:
     get:
       tags:
@@ -536,6 +335,7 @@ paths:
         "201":
           description: No content
   "/invoices/{invoice_id}/details/{detail_id}/approve":
+    summary: Approve invoice detail
     parameters:
       - schema:
           type: string
