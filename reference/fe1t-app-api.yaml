@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: FE1T Documentation
-  version: "0.4.0"
+  version: "0.5.0"
 servers:
   - url: "https://mxp-public-fe1t-app-api.dev.icadsistemi.com/v1"
     description: Development
@@ -256,18 +256,26 @@ paths:
           schema:
             type: integer
             format: unixtime
-        - in: query
+        - name: date_to
+          in: query
           required: false
           schema:
             type: integer
             format: unixtime
-          name: date_to
           description: End datetime range
-        - schema:
-            type: string
+        - name: status_code
           in: query
-          name: status
+          schema:
+            type: string
           description: Invoice status
+          required: true
+          examples:
+            To be approved:
+              value: SF01
+            Approved:
+              value: SF02
+            Historical:
+              value: historical
       responses:
         "200":
           description: OK
