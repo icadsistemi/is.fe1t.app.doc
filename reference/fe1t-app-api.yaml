@@ -38,11 +38,6 @@ paths:
           required: false
           schema:
             type: string
-        - name: name
-          schema:
-            type: string
-          in: query
-          description: Partial or complete customer name
       responses:
         '200':
           description: OK
@@ -64,6 +59,26 @@ paths:
               $ref: '#/components/schemas/CreateCustomerInput'
       tags:
         - Customers
+  /customers/search:
+    get:
+      tags:
+        - Customers
+      summary: Search customer by name
+      parameters:
+        - name: name
+          in: query
+          description: Partial or complete customer name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersOutput'
+    parameters: []
   '/customers/{id}':
     put:
       tags:
@@ -683,10 +698,6 @@ components:
             id: x1xeijzea1yoo
         is_no_profit:
           type: boolean
-        '':
-          type: string
-          x-stoplight:
-            id: b7f90fjcnffs5
     CustomersListOutput:
       type: object
       x-stoplight:
