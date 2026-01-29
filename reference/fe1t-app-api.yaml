@@ -1285,7 +1285,7 @@ components:
         id: 4gh437vakw3ej
       type: object
       properties:
-        fuels_station_id:
+        fuelstation_id:
           type: integer
           x-stoplight:
             id: vn1258j241fgl
