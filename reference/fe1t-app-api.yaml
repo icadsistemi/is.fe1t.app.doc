@@ -38,13 +38,21 @@ paths:
           required: false
           schema:
             type: string
+        - name: name
+          in: query
+          description: Partial or complete customer name
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomersOutput'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomersOutput'
     post:
       summary: Create customer
       operationId: ''
@@ -59,26 +67,6 @@ paths:
               $ref: '#/components/schemas/CreateCustomerInput'
       tags:
         - Customers
-  /customers/search:
-    get:
-      tags:
-        - Customers
-      summary: Search customer by name
-      parameters:
-        - name: name
-          in: query
-          description: Partial or complete customer name
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomersOutput'
-    parameters: []
   '/customers/{id}':
     put:
       tags:
