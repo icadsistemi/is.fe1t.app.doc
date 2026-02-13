@@ -1184,9 +1184,28 @@ components:
     InvoiceDetailsOutput:
       type: object
       properties:
+        id:
+          type: integer
+        amount:
+          type: number
+        customer_name:
+          type: string
+        customer_vat_number:
+          type: string
+        status_code:
+          type: string
+        date_time:
+          type: string
+        is_immediate:
+          type: boolean
+        from_selfnet:
+          type: boolean
+        is_credit_note:
+          type: boolean
         details:
           type: array
           items:
+            type: object
             properties:
               user:
                 type: string
@@ -1202,7 +1221,7 @@ components:
               km:
                 type: integer
               quantity:
-                type: integer
+                type: number
               fuel_station:
                 type: object
                 properties:
@@ -1223,7 +1242,24 @@ components:
               unit_of_measure:
                 type: string
               payments:
-                type: string
+                type: array
+                items:
+                  type: object
+                  properties:
+                    payment_method_code:
+                      type: string
+                    amount:
+                      type: number
+                    cab:
+                      type: string
+                    iban:
+                      type: string
+                    abi:
+                      type: string
+                    id:
+                      type: integer
+                    bic:
+                      type: string
               ddt_number:
                 type: string
               unit_price:
@@ -1249,7 +1285,6 @@ components:
                     type: string
               transaction_timestamp:
                 type: string
-                format: date-time
     InvoiceDetailInput:
       type: object
       properties:
