@@ -1202,6 +1202,10 @@ components:
           type: boolean
         is_credit_note:
           type: boolean
+        customer_id:
+          type: integer
+          x-stoplight:
+            id: 5t2kl6eu0w33u
         details:
           type: array
           items:
