@@ -1295,6 +1295,10 @@ components:
                     type: string
               transaction_timestamp:
                 type: string
+              insert_mode:
+                type: string
+                x-stoplight:
+                  id: 3r40jr2tgrvbi
     InvoiceDetailInput:
       type: object
       properties:
