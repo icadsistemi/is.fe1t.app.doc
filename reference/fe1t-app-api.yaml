@@ -1229,6 +1229,10 @@ components:
               fuel_station:
                 type: object
                 properties:
+                  id:
+                    type: integer
+                    x-stoplight:
+                      id: uccs8uo2xugwe
                   full_address:
                     type: string
                   address:
