@@ -1281,8 +1281,10 @@ components:
               article:
                 type: object
                 properties:
-                  id:
+                  article_code:
                     type: integer
+                    x-stoplight:
+                      id: ttohbusuznzck
                   code:
                     type: string
                   description:
@@ -1331,10 +1333,6 @@ components:
           type: integer
           x-stoplight:
             id: m47ein06xb3vs
-        image:
-          type: string
-          x-stoplight:
-            id: 5vpgjlaaki3wu
         details:
           type: array
           x-stoplight:
@@ -1394,6 +1392,10 @@ components:
                 x-stoplight:
                   id: bajrjlq6fjhb5
                 format: date-time
+              image_data:
+                type: string
+                x-stoplight:
+                  id: pfh3tsimapn5s
     InvoicePrepareOutput:
       title: InvoicePrepareOutput
       x-stoplight:
