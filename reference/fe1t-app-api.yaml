@@ -1299,6 +1299,10 @@ components:
                 type: string
                 x-stoplight:
                   id: 3r40jr2tgrvbi
+              status_code:
+                type: string
+                x-stoplight:
+                  id: pvtgh3jp8d48x
     InvoiceDetailInput:
       type: object
       properties:
