@@ -1286,7 +1286,7 @@ components:
                 type: object
                 properties:
                   article_code:
-                    type: integer
+                    type: string
                     x-stoplight:
                       id: ttohbusuznzck
                   code:
@@ -1388,7 +1388,7 @@ components:
                 x-stoplight:
                   id: 6x6p8y5sjdjz1
               article_code:
-                type: integer
+                type: string
                 x-stoplight:
                   id: en7c0u96z08eb
               receipt_number:
