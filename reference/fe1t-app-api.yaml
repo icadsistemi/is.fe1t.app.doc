@@ -455,7 +455,7 @@ paths:
             schema:
               type: object
               properties:
-                invoices_ids:
+                invoice_ids:
                   type: array
                   items:
                     type: integer
