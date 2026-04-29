@@ -1037,6 +1037,10 @@ components:
                   type: boolean
                 supply_auto_retrieve:
                   type: boolean
+                manual_insert:
+                  type: boolean
+                  x-stoplight:
+                    id: when3cyzunnpe
             unattended:
               type: object
               properties:
