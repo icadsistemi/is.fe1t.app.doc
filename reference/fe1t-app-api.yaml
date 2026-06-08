@@ -1443,6 +1443,34 @@ components:
               type: string
               x-stoplight:
                 id: 4u43mg75tdpnp
+            fiscal_code:
+              type: string
+              x-stoplight:
+                id: preyuso53rasb
+            vat_number:
+              type: string
+              x-stoplight:
+                id: 3b5m8kne6y1ob
+            country:
+              type: string
+              x-stoplight:
+                id: r6twbv6rcnr11
+            province:
+              type: string
+              x-stoplight:
+                id: zzcsvz4v98ehz
+            zip_code:
+              type: string
+              x-stoplight:
+                id: amfklg0dx2p4p
+            city:
+              type: string
+              x-stoplight:
+                id: 22abqb2vdc5k7
+            address:
+              type: string
+              x-stoplight:
+                id: iiz7yym5mi12p
         vehicles:
           type: array
           x-stoplight:
