@@ -1689,7 +1689,7 @@ components:
                   fiscal_code:
                     type: string
             level_id:
-              type: string
+              type: integer
               x-stoplight:
                 id: 5gj719wji0fg3
     UserProfileInput:
