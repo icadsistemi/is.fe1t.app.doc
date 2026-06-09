@@ -1670,28 +1670,23 @@ components:
     UserProfileOutput:
       type: object
       properties:
-        user_profile:
-          type: object
-          properties:
-            username:
-              type: string
-            favourite_customers:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  vat_number:
-                    type: string
-                  fiscal_code:
-                    type: string
-            level_id:
-              type: integer
-              x-stoplight:
-                id: 5gj719wji0fg3
+        username:
+          type: string
+        level_id:
+          type: integer
+        favourite_customers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              vat_number:
+                type: string
+              fiscal_code:
+                type: string
     UserProfileInput:
       type: object
       properties:
