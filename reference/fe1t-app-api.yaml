@@ -1688,7 +1688,10 @@ components:
                     type: string
                   fiscal_code:
                     type: string
-      x-examples: {}
+            level_id:
+              type: string
+              x-stoplight:
+                id: 5gj719wji0fg3
     UserProfileInput:
       type: object
       properties:
