@@ -1029,6 +1029,8 @@ components:
                 type: string
               city:
                 type: string
+              fuelstation_code:
+                type: string
     FuelstationsSettingsOutput:
       type: object
       properties:
