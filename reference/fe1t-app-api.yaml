@@ -1177,6 +1177,9 @@ components:
                 type: boolean
               number:
                 type: string
+              last_edit:
+                type: string
+                format: date-time
     InvoicesApproveInput:
       type: object
       properties:
