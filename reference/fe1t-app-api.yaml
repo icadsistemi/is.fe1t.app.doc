@@ -691,10 +691,10 @@ components:
           type: integer
         has_split_payment:
           type: boolean
-          x-stoplight:
-            id: x1xeijzea1yoo
         is_no_profit:
           type: boolean
+        country_code:
+          type: string
     CustomersListOutput:
       type: object
       x-stoplight:
@@ -1225,8 +1225,8 @@ components:
           type: boolean
         customer_id:
           type: integer
-          x-stoplight:
-            id: 5t2kl6eu0w33u
+        number:
+          type: string
         details:
           type: array
           items:
