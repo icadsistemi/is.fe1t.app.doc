@@ -1324,6 +1324,8 @@ components:
                 type: string
                 x-stoplight:
                   id: pvtgh3jp8d48x
+              image_data:
+                type: string
     InvoiceDetailInput:
       type: object
       properties:
