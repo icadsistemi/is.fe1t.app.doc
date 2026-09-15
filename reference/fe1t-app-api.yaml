@@ -631,6 +631,8 @@ components:
                 type: string
               is_oil:
                 type: boolean
+              family_id:
+                type: integer
         price_levels:
           type: array
           items:
@@ -651,6 +653,14 @@ components:
                   name:
                     type: string
         payment_periodicities:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        families:
           type: array
           items:
             properties:
