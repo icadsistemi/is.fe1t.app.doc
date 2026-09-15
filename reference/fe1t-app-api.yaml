@@ -1679,15 +1679,14 @@ components:
           type: string
           x-stoplight:
             id: mh0mawbfd12e3
-        enabled_articles:
+        enabled_families:
           type: array
           x-stoplight:
             id: 23uukkjeis4x8
-          description: Array of IS product codes. String to be ready to eventually manage non oil
           items:
             x-stoplight:
               id: 9700gh5ryysju
-            type: string
+            type: integer
     UserProfileOutput:
       type: object
       properties:
