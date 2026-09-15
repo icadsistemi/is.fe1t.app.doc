@@ -1080,7 +1080,11 @@ components:
             articles:
               type: array
               items:
-                type: string
+                properties:
+                  code:
+                    type: string
+                  family_id:
+                    type: integer
     FuelstationSettingsInput:
       type: object
       properties:
