@@ -1041,6 +1041,8 @@ components:
                 type: string
               fuelstation_code:
                 type: string
+              supplier:
+                type: string
     FuelstationsSettingsOutput:
       type: object
       properties:
