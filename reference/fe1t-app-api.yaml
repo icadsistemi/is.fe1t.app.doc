@@ -1710,19 +1710,7 @@ components:
     UserProfileInput:
       type: object
       properties:
-        favourite_customers:
+        favourite_customers_ids:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              vat_code:
-                type: string
-              vat_number:
-                type: string
-              fiscal_code:
-                type: string
-      x-examples: {}
+            type: integer
