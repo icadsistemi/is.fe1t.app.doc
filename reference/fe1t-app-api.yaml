@@ -1368,6 +1368,8 @@ components:
         transaction_timestamp:
           type: string
           format: date-time
+        image_data:
+                type: string
     InsertInvoiceInput:
       title: InsertInvoiceInput
       x-stoplight:
