@@ -1164,6 +1164,8 @@ components:
                 type: integer
                 x-stoplight:
                   id: 9iu3aclfpe5km
+              payment_code:
+                type: string
     InvoicesSearchOutput:
       type: object
       properties:
